@@ -65,6 +65,26 @@
   border-left: 1px solid rgba(0, 153, 255, 0.2);
 }
 
+.nav-portrait {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 153, 255, 0.4);
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.nav-character-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-character-name {
+  color: #00ccff;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
 .nav-auth-status {
   color: #88aacc;
   font-size: 0.9rem;

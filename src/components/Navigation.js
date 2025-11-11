@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -26,6 +26,44 @@ const Navigation = () => {
   const characterId = tokens
     ? getCharacterIdFromToken(tokens.accessToken)
     : null;
+  const [characterData, setCharacterData] = useState(null);
+  const [portraitUrl, setPortraitUrl] = useState(null);
+
+  // Fetch character data and portrait
+  useEffect(() => {
+    if (!characterId || characterId === "Unknown") return;
+
+    const fetchCharacterData = async () => {
+      try {
+        // Fetch character info (name)
+        const characterResponse = await fetch(
+          `https://esi.evetech.net/latest/characters/${characterId}/`
+        );
+        if (characterResponse.ok) {
+          const characterInfo = await characterResponse.json();
+          setCharacterData(characterInfo);
+        }
+
+        // Fetch portrait
+        const portraitResponse = await fetch(
+          `https://esi.evetech.net/latest/characters/${characterId}/portrait/`
+        );
+        if (portraitResponse.ok) {
+          const portraitData = await portraitResponse.json();
+          // Use the 256x256 size portrait
+          setPortraitUrl(
+            portraitData.px256x256 ||
+              portraitData.px128x128 ||
+              portraitData.px64x64
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching character data:", error);
+      }
+    };
+
+    fetchCharacterData();
+  }, [characterId]);
 
   return (
     <nav className="top-nav">
@@ -53,9 +91,24 @@ const Navigation = () => {
             </Link>
             {tokens && (
               <div className="nav-auth">
-                <span className="nav-auth-status">
-                  Character ID: {characterId}
-                </span>
+                {portraitUrl && (
+                  <img
+                    src={portraitUrl}
+                    alt={characterData?.name || "Character portrait"}
+                    className="nav-portrait"
+                  />
+                )}
+                <div className="nav-character-info">
+                  {characterData?.name ? (
+                    <span className="nav-character-name">
+                      {characterData.name}
+                    </span>
+                  ) : (
+                    <span className="nav-auth-status">
+                      Character ID: {characterId}
+                    </span>
+                  )}
+                </div>
                 <button
                   className="btn btn-secondary nav-logout"
                   onClick={logout}
