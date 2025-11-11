@@ -285,7 +285,7 @@ app.get("/api/auth/callback", async (req, res) => {
     // Get redirect URI from environment or use current host
     const redirectUri =
       process.env.CALLBACK_URL ||
-      `${req.protocol}://${req.get("host")}/api/auth/callback`;
+      `https://${req.get("host")}/api/auth/callback`;
 
     const tokens = await exchangeCodeForTokens(
       code,
