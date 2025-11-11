@@ -11,13 +11,6 @@ const extractShipKillsAndEfficiency = async (htmlString) => {
   const DestroyedShips = thirdRow.find("td").eq(0).text().trim();
   const Efficiency = thirdRow.find("td").eq(4).text().trim();
 
-  if (htmlString.includes("Severini")) {
-    console.log("--------------------------------");
-    console.log(DestroyedShips);
-    console.log(Efficiency);
-    console.log("--------------------------------");
-  }
-
   return {
     DestroyedShips,
     Efficiency,

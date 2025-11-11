@@ -16,7 +16,7 @@ const getAllianceCorpIds = async (allianceId) => {
   return corpIds;
 };
 
-const getAllianceName = async (allianceId) => {
+const fetchAllianceName = async (allianceId) => {
   const alliance = await fetchPageHtml(
     `https://evewho.com/alliance/${allianceId}`
   );
@@ -26,6 +26,6 @@ const getAllianceName = async (allianceId) => {
 };
 
 module.exports = {
-  getAllianceName,
+  fetchAllianceName,
   getAllianceCorpIds,
 };

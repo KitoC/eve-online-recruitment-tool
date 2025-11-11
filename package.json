@@ -3,16 +3,47 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "getCorpMembers": "node scripts/corpMemberExtractor/index.js",
+    "emailCorpMembers": "node scripts/emailCorpMembers/index.js",
+    "web": "node scripts/emailCorpMembers/webServer.js",
+    "dev": "concurrently \"npm run dev:react\" \"npm run dev:server\"",
+    "dev:react": "PORT=3006 react-scripts start",
+    "dev:server": "node scripts/emailCorpMembers/webServer.js",
+    "build": "react-scripts build",
+    "start": "node scripts/emailCorpMembers/webServer.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.13.2",
     "cheerio": "^1.1.0",
     "dotenv": "^17.2.3",
+    "express": "^4.18.2",
     "googleapis": "^165.0.0",
-    "openai": "^6.8.1"
-  }
+    "open": "^10.1.0",
+    "openai": "^6.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.9.5",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8088"
 }

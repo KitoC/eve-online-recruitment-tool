@@ -7,19 +7,20 @@ const fs = require("fs");
  */
 function saveCharactersToCSV(characters, filename = "departed_characters.csv") {
   if (!characters.length) {
-    console.log("No characters to save.");
     return;
   }
 
   // CSV header
   const headers = [
-    "Id",
     "Name",
-    "DateLeft",
-    "EveWhoLink",
+    "CorpName",
     "DestroyedShips",
     "Efficiency",
+    "DateLeft",
+    "EveWhoLink",
     "ZKillboardLink",
+    "Id",
+    "CorpId",
   ];
   const rows = characters.map((char) =>
     headers.map((h) => `"${(char[h] || "").replace(/"/g, '""')}"`).join(",")

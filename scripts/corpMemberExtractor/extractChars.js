@@ -31,17 +31,6 @@ function extractCharacters(htmlString) {
 }
 
 /**
- * Extract characters (Id, Name, DateLeft) from HTML string
- */
-function extractCorpName(htmlString) {
-  const $ = cheerio.load(htmlString);
-
-  const corpName = $("h4").first().text().trim();
-
-  return corpName;
-}
-
-/**
  * Filter characters who left within the last n days
  */
 function filterByDaysSinceLeft(characters, nDays) {
@@ -58,5 +47,4 @@ function filterByDaysSinceLeft(characters, nDays) {
 module.exports = {
   extractCharacters,
   filterByDaysSinceLeft,
-  extractCorpName,
 };

@@ -1,0 +1,7 @@
+.env
+!.env.example
+.tokens.json
+node_modules/
+build/
+.DS_Store
+*.log
