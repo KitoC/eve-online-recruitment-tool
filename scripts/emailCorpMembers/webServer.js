@@ -298,7 +298,10 @@ app.get("/api/auth/callback", async (req, res) => {
     // In development, redirect to React app (localhost:3006)
     // In production, redirect to root (same origin)
     const tokenData = encodeURIComponent(JSON.stringify(tokens));
-    res.redirect(`${frontendUrl}/?tokens=${tokenData}`);
+
+    const url = `${frontendUrl}/?tokens=${tokenData}`;
+
+    res.redirect(url);
   } catch (error) {
     console.error("OAuth callback error:", error);
     res.redirect(`${frontendUrl}/?error=${encodeURIComponent(error.message)}`);

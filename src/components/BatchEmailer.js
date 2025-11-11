@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { loadTokens, saveTokens, getAuthUrl } from "../utils/auth";
+import { useAuth } from "../contexts/AuthContext";
 import {
   getTemplate,
   sendEmails,
@@ -12,7 +12,7 @@ import TemplateEditor from "./TemplateEditor";
 import ProgressSection from "./ProgressSection";
 
 function BatchEmailer() {
-  const [tokens, setTokens] = useState(null);
+  const { tokens, authenticate } = useAuth();
   const [csvData, setCsvData] = useState(null);
   const [template, setTemplate] = useState({
     subject: "",
@@ -25,40 +25,6 @@ function BatchEmailer() {
     message: "Ready to start",
     status: "idle",
   });
-
-  // Check for tokens in URL (from OAuth callback)
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tokensParam = urlParams.get("tokens");
-    const error = urlParams.get("error");
-
-    if (tokensParam) {
-      try {
-        const parsedTokens = JSON.parse(decodeURIComponent(tokensParam));
-        saveTokens(parsedTokens);
-        setTokens(parsedTokens);
-        // Clean URL
-        window.history.replaceState(
-          {},
-          document.title,
-          window.location.pathname
-        );
-      } catch (e) {
-        console.error("Failed to parse tokens from URL:", e);
-      }
-    }
-
-    if (error) {
-      alert(`Authentication error: ${error}`);
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    // Load tokens from localStorage
-    const storedTokens = loadTokens();
-    if (storedTokens) {
-      setTokens(storedTokens);
-    }
-  }, []);
 
   // Load template on mount
   useEffect(() => {
@@ -86,15 +52,6 @@ function BatchEmailer() {
 
     return () => clearInterval(interval);
   }, []);
-
-  const handleAuth = async () => {
-    try {
-      const authUrl = await getAuthUrl();
-      window.location.href = authUrl;
-    } catch (error) {
-      alert("Failed to get authorization URL: " + error.message);
-    }
-  };
 
   const handleFileUpload = (uploadedCsvData) => {
     setCsvData(uploadedCsvData);
@@ -144,12 +101,9 @@ function BatchEmailer() {
       </div>
 
       <div className="content">
-        <AuthStatus tokens={tokens} onAuth={handleAuth} />
+        <AuthStatus />
 
-        <FileSelector
-          csvData={csvData}
-          onFileUpload={handleFileUpload}
-        />
+        <FileSelector csvData={csvData} onFileUpload={handleFileUpload} />
 
         <TemplateEditor
           template={template}
@@ -168,4 +122,3 @@ function BatchEmailer() {
 }
 
 export default BatchEmailer;
-

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 // Helper to extract character ID from JWT
 function getCharacterIdFromToken(token) {
@@ -18,7 +19,8 @@ function getCharacterIdFromToken(token) {
   }
 }
 
-const AuthStatus = ({ tokens, onAuth }) => {
+const AuthStatus = () => {
+  const { tokens, authenticate } = useAuth();
   const characterId = tokens ? getCharacterIdFromToken(tokens.accessToken) : null;
 
   return (
@@ -31,7 +33,7 @@ const AuthStatus = ({ tokens, onAuth }) => {
         )}
       </span>
       {!tokens && (
-        <button className="btn btn-primary" onClick={onAuth}>
+        <button className="btn btn-primary" onClick={authenticate}>
           Authenticate
         </button>
       )}

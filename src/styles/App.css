@@ -164,6 +164,18 @@ body {
   box-shadow: 0 0 15px rgba(255, 102, 102, 0.4);
 }
 
+.btn-secondary {
+  background: rgba(100, 100, 120, 0.2);
+  color: #aaccff;
+  border-color: rgba(100, 100, 120, 0.5);
+}
+
+.btn-secondary:hover {
+  background: rgba(100, 100, 120, 0.3);
+  border-color: #aaccff;
+  box-shadow: 0 0 15px rgba(170, 204, 255, 0.4);
+}
+
 .btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
