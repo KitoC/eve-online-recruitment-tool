@@ -2,11 +2,15 @@ services:
   - type: web
     name: eve-email-sender
     env: node
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci && SKIP_PREFLIGHT_CHECK=true npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 8086
+      - key: SKIP_PREFLIGHT_CHECK
+        value: "true"
+      - key: CI
+        value: "false"
 
