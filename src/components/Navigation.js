@@ -22,7 +22,7 @@ function getCharacterIdFromToken(token) {
 
 const Navigation = () => {
   const location = useLocation();
-  const { tokens, logout } = useAuth();
+  const { tokens, logout, authenticate } = useAuth();
   const characterId = tokens
     ? getCharacterIdFromToken(tokens.accessToken)
     : null;
@@ -89,7 +89,7 @@ const Navigation = () => {
             >
               Member Extractor
             </Link>
-            {tokens && (
+            {tokens ? (
               <div className="nav-auth">
                 {portraitUrl && (
                   <img
@@ -114,6 +114,15 @@ const Navigation = () => {
                   onClick={logout}
                 >
                   Logout
+                </button>
+              </div>
+            ) : (
+              <div className="nav-auth">
+                <button
+                  className="btn btn-primary nav-login"
+                  onClick={authenticate}
+                >
+                  Login
                 </button>
               </div>
             )}

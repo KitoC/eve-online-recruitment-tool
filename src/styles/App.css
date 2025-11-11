@@ -14,6 +14,11 @@ body {
   min-height: 100vh;
   padding: 20px;
   color: #e0e0e0;
+  padding: 0;
+}
+
+.content {
+  padding: 20px;
 }
 
 .container {

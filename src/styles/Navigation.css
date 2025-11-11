@@ -91,7 +91,8 @@
   font-weight: 500;
 }
 
-.nav-logout {
+.nav-logout,
+.nav-login {
   padding: 8px 16px;
   font-size: 0.9rem;
 }

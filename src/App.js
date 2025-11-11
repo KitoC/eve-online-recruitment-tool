@@ -18,11 +18,16 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Navigation />
-        <Routes>
-          <Route path="/" element={<NavigateWithAuth to="/batch-emailer" />} />
-          <Route path="/batch-emailer" element={<BatchEmailer />} />
-          <Route path="/member-extractor" element={<MemberExtractor />} />
-        </Routes>
+        <div className="content">
+          <Routes>
+            <Route
+              path="/"
+              element={<NavigateWithAuth to="/batch-emailer" />}
+            />
+            <Route path="/batch-emailer" element={<BatchEmailer />} />
+            <Route path="/member-extractor" element={<MemberExtractor />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   );
