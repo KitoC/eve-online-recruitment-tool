@@ -8,9 +8,9 @@
     "emailCorpMembers": "node scripts/emailCorpMembers/index.js",
     "web": "node scripts/emailCorpMembers/webServer.js",
     "dev": "concurrently \"npm run dev:react\" \"npm run dev:server\"",
-    "dev:react": "PORT=3006 react-scripts start",
+    "dev:react": "PORT=3006 npx react-scripts start",
     "dev:server": "node scripts/emailCorpMembers/webServer.js",
-    "build": "react-scripts build",
+    "build": "npx react-scripts build",
     "start": "node scripts/emailCorpMembers/webServer.js"
   },
   "keywords": [],
