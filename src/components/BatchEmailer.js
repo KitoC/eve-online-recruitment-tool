@@ -96,8 +96,8 @@ function BatchEmailer() {
   return (
     <div className="container">
       <div className="header">
-        <h1>📧 Batch Emailer</h1>
-        <p>Send bulk messages to corporation members</p>
+        <h1>📧 Batch Eve Mailer</h1>
+        <p>Send bulk messages to eve players</p>
       </div>
 
       <div className="content">

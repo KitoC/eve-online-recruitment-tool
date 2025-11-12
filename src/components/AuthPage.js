@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const AuthPage = () => {
   const { isAuthenticated, isInitialized, authenticate } = useAuth();
 
-  // If already authenticated, redirect to batch emailer
+  // If already authenticated, redirect to Batch Eve Mailer
   if (isInitialized && isAuthenticated) {
     return <Navigate to="/batch-emailer" replace />;
   }
@@ -33,7 +33,7 @@ const AuthPage = () => {
           <div style={{ textAlign: "center", padding: "2rem" }}>
             <p style={{ marginBottom: "2rem", fontSize: "1.1rem" }}>
               You need to authenticate with EVE Online to use the Member
-              Extractor and Batch Emailer tools.
+              Extractor and Batch Eve Mailer tools.
             </p>
             <button className="btn btn-primary" onClick={authenticate}>
               Authenticate with EVE Online
@@ -46,4 +46,3 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
-

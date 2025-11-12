@@ -79,7 +79,7 @@ const Navigation = () => {
                 location.pathname === "/batch-emailer" ? "active" : ""
               }`}
             >
-              Batch Emailer
+              Batch Eve Mailer
             </Link>
             <Link
               to="/member-extractor"
